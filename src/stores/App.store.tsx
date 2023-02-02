@@ -2,13 +2,23 @@
 import { action, makeAutoObservable } from 'mobx'
 import { RootStore } from './Root.store'
 import axios from 'axios'
-import { IProductsFetchProps, IProduct } from 'interfaces/products'
+import {
+  IProductsFetchProps,
+  IProduct,
+  IProductListProperties,
+} from 'interfaces/products'
 
 export class AppStore {
   rootStore: RootStore
   params: IProductsFetchProps = {
     page: 1,
     per_page: 5,
+  }
+  productListProperties: IProductListProperties = {
+    page: 1,
+    perPage: 5,
+    total: -1,
+    totalPages: -1,
   }
   products: IProduct[] = []
 
@@ -19,6 +29,7 @@ export class AppStore {
 
   @action.bound setQuery = (params: IProductsFetchProps) => {
     this.params = { ...params }
+    console.log(params)
     this.fetchData()
   }
 
@@ -27,12 +38,27 @@ export class AppStore {
       const fetch = await axios.get('https://reqres.in/api/products', {
         params: this.params,
       })
-      if (fetch.data.data.length) {
-        this.products = [...fetch.data.data]
-      } else if (fetch.data.data) {
-        this.products = [fetch.data.data]
+      const { page, per_page, total, total_pages, data } = fetch.data
+      if (data.length) {
+        this.products = [...data]
+      } else if (data) {
+        this.products = [data]
       }
-      console.log(this.products)
+      if (page && per_page && total && total_pages) {
+        this.productListProperties = {
+          page: page,
+          perPage: per_page,
+          total: total,
+          totalPages: total_pages,
+        }
+      } else {
+        this.productListProperties = {
+          page: 1,
+          perPage: 1,
+          total: 1,
+          totalPages: 1,
+        }
+      }
     } catch (error) {
       console.log(error)
     }

@@ -4,12 +4,11 @@ export interface IProductsFetchProps {
   id?: number
 }
 
-export interface IProductsData {
+export interface IProductListProperties {
   page: number
-  per_page: number
+  perPage: number
   total: number
-  total_pages: number
-  data: IProduct[]
+  totalPages: number
 }
 
 export interface IProduct {

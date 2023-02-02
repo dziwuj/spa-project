@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { StoreContext } from 'index'
 import TextField from '@mui/material/TextField'
 import { observer } from 'mobx-react'
+import { Pagination } from 'components/Pagination'
 
 const App: React.FunctionComponent = observer(() => {
   const store = useContext(StoreContext)
@@ -16,8 +17,11 @@ const App: React.FunctionComponent = observer(() => {
   }, [searchParams])
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value !== '') setSearchParams({ id: e.target.value })
-    else setSearchParams({})
+    if (e.target.value !== '') {
+      setSearchParams({ id: e.target.value })
+    } else {
+      setSearchParams({})
+    }
   }
 
   return (
@@ -31,6 +35,7 @@ const App: React.FunctionComponent = observer(() => {
         defaultValue={searchParams.get('id') || ''}
       />
       <TableComponent />
+      <Pagination />
     </div>
   )
 })
