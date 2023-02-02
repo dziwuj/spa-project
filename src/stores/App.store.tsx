@@ -54,7 +54,7 @@ export class AppStore {
       } else {
         this.productListProperties = {
           page: 1,
-          perPage: 1,
+          perPage: 5,
           total: 1,
           totalPages: 1,
         }

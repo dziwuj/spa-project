@@ -36,12 +36,7 @@ const Pagination: React.FunctionComponent = observer(() => {
       component='div'
       count={total}
       page={page - 1}
-      rowsPerPageOptions={[
-        ...Array.from(new Set([perPage, 5, 10]))
-          .filter((val) => val > 0)
-          .sort((a, b) => a - b),
-        { value: -1, label: 'All' },
-      ]}
+      rowsPerPageOptions={[5, 10, { value: -1, label: 'All' }]}
       rowsPerPage={perPage}
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}

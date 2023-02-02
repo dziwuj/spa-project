@@ -12,7 +12,8 @@ const App: React.FunctionComponent = observer(() => {
 
   useEffect(() => {
     const params = Object.fromEntries([...searchParams])
-    if (!params.per_page) params.per_page = '5'
+    if (!params.per_page || ![5, 10, -1].includes(Number(params.per_page)))
+      params.per_page = '5'
     store.AppStore.setQuery(params)
   }, [searchParams])
 
@@ -25,18 +26,19 @@ const App: React.FunctionComponent = observer(() => {
   }
 
   return (
-    <div className='app'>
+    <main>
       <TextField
         type='number'
         label='Search by id'
         name='id-search'
         id='id-search'
+        inputProps={{ min: 0 }}
         onChange={handleSearch}
         defaultValue={searchParams.get('id') || ''}
       />
       <TableComponent />
       <Pagination />
-    </div>
+    </main>
   )
 })
 

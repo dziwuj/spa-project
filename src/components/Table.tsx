@@ -14,7 +14,7 @@ const TableComponent: React.FunctionComponent = observer(() => {
   const { products } = store.AppStore
 
   return (
-    <Table sx={{ maxWidth: 500 }}>
+    <Table sx={{ maxWidth: 750 }}>
       <TableHead>
         <TableRow>
           <TableCell align='left'>id</TableCell>
