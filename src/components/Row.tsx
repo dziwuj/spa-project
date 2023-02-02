@@ -1,21 +1,17 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { IProduct } from '../interfaces/products'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
 
-interface IRowProps {
-  key: number
-  product: IProduct
-}
-
-const Row: React.FunctionComponent<IRowProps> = observer(
-  ({ key, product }: IRowProps) => {
-    const { id, name, year, color } = product
+const Row: React.FunctionComponent<IProduct> = observer(
+  ({ id, name, year, color }: IProduct) => {
     return (
-      <tr style={{ backgroundColor: `${color}` }} key={key}>
-        <td>{id}</td>
-        <td>{name}</td>
-        <td>{year}</td>
-      </tr>
+      <TableRow sx={{ backgroundColor: color }}>
+        <TableCell align='left'>{id}</TableCell>
+        <TableCell align='center'>{name}</TableCell>
+        <TableCell align='right'>{year}</TableCell>
+      </TableRow>
     )
   }
 )

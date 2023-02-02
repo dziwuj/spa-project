@@ -6,6 +6,10 @@ import { IProductsFetchProps, IProduct } from 'interfaces/products'
 
 export class AppStore {
   rootStore: RootStore
+  params: IProductsFetchProps = {
+    page: 1,
+    per_page: 5,
+  }
   products: IProduct[] = []
 
   constructor(rootStore: RootStore) {
@@ -13,15 +17,22 @@ export class AppStore {
     this.rootStore = rootStore
   }
 
-  @action.bound fetchData = async (params: IProductsFetchProps) => {
+  @action.bound setQuery = (params: IProductsFetchProps) => {
+    this.params = { ...params }
+    this.fetchData()
+  }
+
+  @action.bound fetchData = async () => {
     try {
       const fetch = await axios.get('https://reqres.in/api/products', {
-        params: params,
+        params: this.params,
       })
-      console.log(fetch.data)
-      // if (fetch.data.data) {
-      //   this.products = [...fetch.data.data]
-      // }
+      if (fetch.data.data.length) {
+        this.products = [...fetch.data.data]
+      } else if (fetch.data.data) {
+        this.products = [fetch.data.data]
+      }
+      console.log(this.products)
     } catch (error) {
       console.log(error)
     }

@@ -1,36 +1,34 @@
-import React, { useContext, useEffect } from 'react'
-import { observer } from 'mobx-react-lite'
-import { useSearchParams } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { observer } from 'mobx-react'
 import { IProduct } from '../interfaces/products'
 import { Row } from './Row'
 import { StoreContext } from '../index'
+import Table from '@mui/material/Table'
+import TableHead from '@mui/material/TableHead'
+import TableBody from '@mui/material/TableBody'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
 
-const Table: React.FunctionComponent = observer(() => {
+const TableComponent: React.FunctionComponent = observer(() => {
   const store = useContext(StoreContext)
   const { products } = store.AppStore
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  useEffect(() => {
-    console.log(searchParams.get('page'))
-    // store.AppStore.fetchData()
-  }, [])
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>year</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table sx={{ maxWidth: 500 }}>
+      <TableHead>
+        <TableRow>
+          <TableCell align='left'>id</TableCell>
+          <TableCell align='center'>name</TableCell>
+          <TableCell align='right'>year</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
         {products.map((product: IProduct) => (
-          <Row key={product.id} product={product} />
+          <Row {...product} key={product.id} />
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   )
 })
 
-export { Table }
+export { TableComponent }
