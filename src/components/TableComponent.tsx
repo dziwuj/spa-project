@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { observer } from 'mobx-react'
-import { IProduct } from '../interfaces/products'
+import { IProduct } from '@interfaces/products'
 import { Row } from './Row'
 import { StoreContext } from '../index'
 import Table from '@mui/material/Table'

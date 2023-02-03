@@ -6,7 +6,7 @@ import {
   IProductsFetchProps,
   IProduct,
   IProductListProperties,
-} from 'interfaces/products'
+} from '@interfaces/products'
 
 export class AppStore {
   rootStore: RootStore
