@@ -16,7 +16,7 @@ const TableComponent: React.FunctionComponent = observer(() => {
   return (
     <Table sx={{ maxWidth: 750 }}>
       <TableHead>
-        <TableRow>
+        <TableRow data-testid='table-row'>
           <TableCell align='left'>id</TableCell>
           <TableCell align='center'>name</TableCell>
           <TableCell align='right'>year</TableCell>

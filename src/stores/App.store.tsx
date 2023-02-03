@@ -29,7 +29,6 @@ export class AppStore {
 
   @action.bound setQuery = (params: IProductsFetchProps) => {
     this.params = { ...params }
-    console.log(params)
     this.fetchData()
   }
 

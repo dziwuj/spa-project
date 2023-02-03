@@ -6,17 +6,21 @@ import type { JestConfigWithTsJest } from 'ts-jest'
 
 const jestConfig: JestConfigWithTsJest = {
   // [...]
-  roots: ['<rootDir>'],
   modulePaths: [compilerOptions.baseUrl], // <-- This will be set to 'baseUrl' value
   moduleNameMapper: pathsToModuleNameMapper(
     compilerOptions.paths /*, { prefix: '<rootDir>/' } */
   ),
+  preset: 'ts-jest',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-  rootDir: '.',
-  moduleDirectories: ['node_modules', 'src'],
+  transformIgnorePatterns: [
+    'node_modules/(?!axios)/',
+    'node_modules/(?!history)/',
+  ],
+  testEnvironment: 'node',
+  moduleDirectories: ['node_modules', '.'],
 }
 
 export default jestConfig

@@ -35,6 +35,7 @@ const ModalComponent: React.FunctionComponent<IModalComponentProps> = ({
       onClose={handleClose}
       aria-labelledby='modal-modal-title'
       aria-describedby='modal-modal-description'
+      data-testid='modal-component'
     >
       <Box sx={style}>
         {Object.entries(properties).map(([key, value]) => (

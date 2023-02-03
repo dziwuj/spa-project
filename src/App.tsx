@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react'
-import { TableComponent } from '@components/TableComponent'
+import { TableComponent } from './components/TableComponent'
 import { useSearchParams } from 'react-router-dom'
 import { StoreContext } from './index'
 import TextField from '@mui/material/TextField'
 import { observer } from 'mobx-react'
-import { Pagination } from '@components/Pagination'
+import { Pagination } from './components/Pagination'
 
 const App: React.FunctionComponent = observer(() => {
   const store = useContext(StoreContext)
